@@ -1,7 +1,24 @@
 <?php
 
+$template = '
+<section>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+';
+
 //get config
 $ewsConfig = rex_var::toArray("REX_VALUE[20]");
+
+$grid = explode('_',$ewsConfig['grid_layout']);
+
 
 //fetch items
 $items = rex_var::toArray("REX_VALUE[1]");
