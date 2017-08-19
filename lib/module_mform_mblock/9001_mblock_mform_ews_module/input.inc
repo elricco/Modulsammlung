@@ -11,9 +11,10 @@ if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailab
     // init mform
     $mform = new MForm();
 
-    // fieldset
+    // Config Tab
     $mform->addTab('Einstellungen');
 
+    // Grid Layout Fieldset
     $mform->addFieldset('Grid Layout',array('class'=> 'grid_layout'));
     //$mform->addHeadline('Grid Layout', array('class'=>'text-center'));
     //variable grid_layout
@@ -83,7 +84,70 @@ if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailab
 
     $mform->addRadioField("$id.0.grid_layout",$grid_layout,array('label'=>'Grid Layout','class'=>'grid_layout'));
 
-    //$mform->addHtml('</div>');
+    //Config Inputs
+    $mform->addFieldset('Weitere Einstellungen',array('class'=>'configs'));
+
+    $mform->addHeadline('Klassen und ID');
+
+    //Class(es)
+    //@Todo: needs selectize
+    $mform->addTextField("$id.0.class", array('label'=>'Klasse(n)','class'=>'selectize'));
+
+    //ID
+    $mform->addTextField("$id.0.id", array('label'=>'ID'));
+
+    $mform->addHeadline('Padding');
+    $mform->addDescription('Padding vergrößert den Abstand innerhalb des Elements. Die Angaben sind mit Maßen zu setzen, z.B. px, %, etc.');
+
+    //Padding Top
+    $mform->addTextField("$id.0.padding-top", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-up"></i></span>'));
+
+    //Padding Right
+    $mform->addTextField("$id.0.padding-right", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-right"></i></span>'));
+
+    //Padding Bottom
+    $mform->addTextField("$id.0.padding-bottom", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-down"></i></span>'));
+
+    //Padding Left
+    $mform->addTextField("$id.0.padding-left", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-left"></i></span>'));
+
+    $mform->addHeadline('Margin');
+    $mform->addDescription('Margin vergrößert den Abstand außerhalb des Elements. Die Angaben sind mit Maßen zu setzen, z.B. px, %, etc.');
+
+    //Margin Top
+    $mform->addTextField("$id.0.margin-top", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-up"></i></span>'));
+
+    //Margin Right
+    $mform->addTextField("$id.0.margin-right", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-right"></i></span>'));
+
+    //Margin Bottom
+    $mform->addTextField("$id.0.margin-bottom", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-down"></i></span>'));
+
+    //Margin Left
+    $mform->addTextField("$id.0.margin-left", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-left"></i></span>'));
+
+    $mform->addHeadline('Farben und Hintergründe');
+
+    //Text Color
+    $mform->addTextField("$id.0.textColor", array('label'=>'Textfarbe'));
+
+    //Background Color
+    $mform->addTextField("$id.0.bgColor", array('label'=>'HG-Farbe'));
+
+    //Background Image
+    $mform->addMediaField("$id.0.bgImage", array('types'=>'gif,jpg,png','preview'=>1,'label'=>'HG-Bild'));
+
+    //Background-Repeat
+    $mform->addSelectField("$id.0.bgRepeat",array('no-repeat','repeat', 'repeat-x','repeat-y','round','space','inherit'),array('label'=>'HG-Wiederholung'));
+
+    //Background-Size
+    $mform->addSelectField("$id.0.bgSize",array('auto','cover', 'contain'),array('label'=>'HG-Verhalten'));
+
+    //Background-Position
+    $mform->addSelectField("$id.0.bgposition",array('left top','left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom'),array('label'=>'HG-Position'));
+
+    //$mform->addHeadline('Animation');
+    //@ToDo: Needs animation states and how to animate (Waypoint?);
 
 
     echo $mform->show();
@@ -95,6 +159,9 @@ else {
 
 if(rex::isBackend()) { ?>
     <style>
+        select.form-control {
+            min-height: 34px;
+        }
         .grid_layout .form-group {
             max-width: 680px;
             margin: 0 auto;
@@ -294,6 +361,15 @@ if(rex::isBackend()) { ?>
         }
         .grid_4_2_3_3 {
             background-image: url('../assets/9001_mblock_mform_ews_module_assets/img/grid_-assets/grid_4_2_3_3.png');
+        }
+
+        .mform-headline h3 {
+            font-size: 18px;
+        }
+        .form-group.mform-headline,
+        .form-group.mform-description {
+            margin-left: 0;
+            margin-right: 0;
         }
     </style>
 
