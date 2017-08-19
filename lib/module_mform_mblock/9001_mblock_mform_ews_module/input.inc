@@ -89,47 +89,72 @@ if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailab
 
     $mform->addHeadline('Klassen und ID');
 
+    $mform->addHtml('<div class="row">');
+    $mform->addHtml('<div class="col-sm-7">');
     //Class(es)
-    //@Todo: needs selectize
     $mform->addTextField("$id.0.class", array('label'=>'Klasse(n)','class'=>'selectize'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-5">');
     //ID
     $mform->addTextField("$id.0.id", array('label'=>'ID'));
+    $mform->addHtml('</div>');
+    $mform->addHtml('</div>');
 
     $mform->addHeadline('Padding');
     $mform->addDescription('Padding vergrößert den Abstand innerhalb des Elements. Die Angaben sind mit Maßen zu setzen, z.B. px, %, etc.');
 
+    $mform->addHtml('<div class="row">');
+    $mform->addHtml('<div class="col-sm-3">');
     //Padding Top
     $mform->addTextField("$id.0.padding-top", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-up"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Padding Right
     $mform->addTextField("$id.0.padding-right", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-right"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Padding Bottom
     $mform->addTextField("$id.0.padding-bottom", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-down"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Padding Left
     $mform->addTextField("$id.0.padding-left", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-left"></i></span>'));
+    $mform->addHtml('</div>');
+    $mform->addHtml('</div>');
 
     $mform->addHeadline('Margin');
     $mform->addDescription('Margin vergrößert den Abstand außerhalb des Elements. Die Angaben sind mit Maßen zu setzen, z.B. px, %, etc.');
 
+    $mform->addHtml('<div class="row">');
+    $mform->addHtml('<div class="col-sm-3">');
     //Margin Top
     $mform->addTextField("$id.0.margin-top", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-up"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Margin Right
     $mform->addTextField("$id.0.margin-right", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-right"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Margin Bottom
     $mform->addTextField("$id.0.margin-bottom", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-down"></i></span>'));
+    $mform->addHtml('</div>');
 
+    $mform->addHtml('<div class="col-sm-3">');
     //Margin Left
     $mform->addTextField("$id.0.margin-left", array('label'=>'<span class="text-center"><i class="fa fa-fw fa-arrow-left"></i></span>'));
+    $mform->addHtml('</div>');
+    $mform->addHtml('</div>');
 
     $mform->addHeadline('Farben und Hintergründe');
 
     //Text Color
-    $mform->addTextField("$id.0.textColor", array('label'=>'Textfarbe','class'=>'textColor'));
+    $mform->addTextField("$id.0.textColor", array('label'=>'Text-Farbe','class'=>'textColor'));
 
     //Background Color
     $mform->addTextField("$id.0.bgColor", array('label'=>'HG-Farbe','class'=>'bgColor'));
@@ -138,13 +163,13 @@ if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailab
     $mform->addMediaField("$id.0.bgImage", array('types'=>'gif,jpg,png','preview'=>1,'label'=>'HG-Bild'));
 
     //Background-Repeat
-    $mform->addSelectField("$id.0.bgRepeat",array('no-repeat','repeat', 'repeat-x','repeat-y','round','space','inherit'),array('label'=>'HG-Wiederholung'));
+    $mform->addSelectField("$id.0.bgRepeat",array('no-repeat','repeat', 'repeat-x','repeat-y','round','space','inherit'),array('label'=>'Repeat'));
 
     //Background-Size
-    $mform->addSelectField("$id.0.bgSize",array('auto','cover', 'contain'),array('label'=>'HG-Verhalten'));
+    $mform->addSelectField("$id.0.bgSize",array('auto','cover', 'contain'),array('label'=>'Size'));
 
     //Background-Position
-    $mform->addSelectField("$id.0.bgposition",array('left top','left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom'),array('label'=>'HG-Position'));
+    $mform->addSelectField("$id.0.bgposition",array('left top','left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom'),array('label'=>'Position'));
 
     //$mform->addHeadline('Animation');
     //@ToDo: Needs animation states and how to animate (Waypoint?);
@@ -216,6 +241,11 @@ if(rex::isBackend()) { ?>
         }
         label input[type="radio"]:checked ~ i[class^='grid_'],
         label input[type="radio"]:checked ~ i[class*='grid_']
+        {
+            background-color: #3bb594;
+        }
+        i[class^='grid_']:hover,
+        i[class*='grid_']:hover
         {
             background-color: #3bb594;
         }
@@ -403,7 +433,7 @@ if(rex::isBackend()) { ?>
         }
 
         .mform-headline h3 {
-            font-size: 18px;
+            font-size: 18px !important;
         }
         .form-group.mform-headline,
         .form-group.mform-description {
