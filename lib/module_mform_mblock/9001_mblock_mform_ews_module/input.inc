@@ -3,7 +3,7 @@
 // this modul input uses the mform addon
 // this modul input uses the mblock addon
 
-if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailable()) {
+if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailable() && rex::isBackend()) {
     echo '<p>YAY!</p>';
     // base ID
     $id = 1;
@@ -129,10 +129,10 @@ if(rex_addon::get('mform')->isAvailable() && rex_addon::get('mblock')->isAvailab
     $mform->addHeadline('Farben und Hintergründe');
 
     //Text Color
-    $mform->addTextField("$id.0.textColor", array('label'=>'Textfarbe'));
+    $mform->addTextField("$id.0.textColor", array('label'=>'Textfarbe','class'=>'textColor'));
 
     //Background Color
-    $mform->addTextField("$id.0.bgColor", array('label'=>'HG-Farbe'));
+    $mform->addTextField("$id.0.bgColor", array('label'=>'HG-Farbe','class'=>'bgColor'));
 
     //Background Image
     $mform->addMediaField("$id.0.bgImage", array('types'=>'gif,jpg,png','preview'=>1,'label'=>'HG-Bild'));
@@ -158,9 +158,48 @@ else {
 }
 
 if(rex::isBackend()) { ?>
+    <script>
+        $(function () {
+            $('.selectize').selectize({
+                delimiter: ',',
+                persist: false,
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+            });
+
+            var settings = {
+                animationSpeed: 50,
+                animationEasing: 'swing',
+                change: null,
+                changeDelay: 0,
+                control: 'hue',
+                defaultValue: '',
+                format: 'rgb',
+                hide: null,
+                hideSpeed: 100,
+                inline: false,
+                keywords: '',
+                letterCase: 'lowercase',
+                opacity: true,
+                position: 'bottom left',
+                show: null,
+                showSpeed: 100,
+                theme: 'bootstrap',
+                swatches: []
+            };
+
+            $('input.textColor').minicolors(settings);
+            $('input.bgColor').minicolors(settings);
+        });
+    </script>
+
     <style>
         select.form-control {
-            min-height: 34px;
+            height: 34px;
         }
         .grid_layout .form-group {
             max-width: 680px;
